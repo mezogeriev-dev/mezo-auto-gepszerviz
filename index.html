@@ -225,14 +225,14 @@
       status.textContent = 'Az űrlap még nincs összekötve a központi táblázattal. A TELEPITESI_UTMUTATO.txt alapján illeszd be a Webalkalmazás URL-jét.';
       return;
     }
-    const payload = new URLSearchParams({
+const payload = new URLSearchParams({
   name: get('qName'),
   phone: get('qPhone'),
   vehicle: get('qVehicle'),
   work: get('qWork'),
   town: get('qTown'),
-  details: get('qDetails'),
   number: get('qnumber'),
+  details: get('qDetails'),
   website: get('website'),
   page: window.location.href
 });
