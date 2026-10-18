@@ -153,7 +153,7 @@
 
 
     <section id="arajanlat"><div class="wrap">
-      <div class="section-head"><div class="eyebrow">Kérj visszajelzést</div><h2>Árajánlatkérés</h2><p>Írd le röviden, milyen járműről vagy gépről van szó. A gomb az üzenetküldő alkalmazásban előkészíti az SMS-t.</p></div>
+      <div class="section-head"><div class="eyebrow">Kérj visszajelzést</div><h2>Árajánlatkérés</h2><p>Írd le röviden, milyen járműről vagy gépről van szó. Az ajánlatkérés a központi ügyféllistába kerül.</p></div>
       <div class="contact-panel">
         <form id="quoteForm">
           <div class="form-grid">
@@ -163,8 +163,9 @@
             <label>Település<input id="qTown" name="town" placeholder="Pl. Debrecen"></label>
             <label class="full">Részletek<textarea id="qDetails" name="details" rows="4" placeholder="Mi a probléma? Mikor lenne megfelelő?"></textarea></label>
           </div>
-          <button class="btn" type="submit">✉ Árajánlatkérés SMS-ben</button>
-          <p class="form-help">Az űrlap nem tárol adatokat és nem küld automatikusan szerverre. A gomb az SMS alkalmazást nyitja meg, ahol elküldés előtt ellenőrizheted az üzenetet.</p>
+          <button class="btn" id="quoteSubmit" type="submit">✉ Árajánlatkérés elküldése</button>
+          <p class="form-help" id="formStatus" role="status" aria-live="polite">Az adatok a vállalkozás központi Google Táblázatába kerülnek. Ne adj meg jelszót vagy más érzékeny adatot.</p>
+          <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px" >
         </form>
       </div>
     </div></section>
@@ -189,18 +190,36 @@
   <footer><div class="wrap footer-inner"><span>© <span id="year">2026</span> Mező Autó- és Gépszerviz</span><span>Debrecen és környéke · <a href="tel:+36702812869">06 70 281 2869</a></span></div></footer>
   <a class="btn mobile-call" href="tel:+36702812869">☎ Hívás: 06 70 281 2869</a>
   <script>document.getElementById('year').textContent = new Date().getFullYear();
-  document.getElementById('quoteForm').addEventListener('submit', function(e) {
+  // FONTOS: ide illeszd be a Google Apps Script telepítésekor kapott /exec URL-t.
+  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyXQz5EB0WDEGNZYiLbaIpL7PSanEO5F8v-m4A22Rby-GDBKB9EGMP23LkfYWNyCwOM/exec';
+  document.getElementById('quoteForm').addEventListener('submit', async function(e) {
     e.preventDefault();
+    const status = document.getElementById('formStatus');
+    const button = document.getElementById('quoteSubmit');
     const get = id => document.getElementById(id).value.trim();
-    const parts = [
-      'Árajánlatkérés – Mező Autó- és Gépszerviz',
-      'Név: ' + (get('qName') || 'Nincs megadva'),
-      'Jármű/gép: ' + get('qVehicle'),
-      'Munka: ' + get('qWork'),
-      'Település: ' + (get('qTown') || 'Nincs megadva'),
-      'Részletek: ' + (get('qDetails') || 'Nincs megadva')
-    ];
-    window.location.href = 'sms:+36702812869?body=' + encodeURIComponent(parts.join('\\n'));
+    if (get('website')) return; // egyszerű spamcsapda
+    if (GOOGLE_SCRIPT_URL.startsWith('IDE_MASOLD')) {
+      status.textContent = 'Az űrlap még nincs összekötve a központi táblázattal. A TELEPITESI_UTMUTATO.txt alapján illeszd be a Webalkalmazás URL-jét.';
+      return;
+    }
+    const payload = new URLSearchParams({
+      name: get('qName'), vehicle: get('qVehicle'), work: get('qWork'),
+      town: get('qTown'), details: get('qDetails'), website: get('website'),
+      page: window.location.href
+    });
+    button.disabled = true; button.textContent = 'Küldés…';
+    status.textContent = 'Ajánlatkérés küldése…';
+    try {
+      // Apps Script web app POST: no-cors módban a böngésző nem teszi olvashatóvá a választ.
+      // A beküldés után ezért ellenőrző szöveget mutatunk; tesztbeküldés szükséges.
+      await fetch(GOOGLE_SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: payload });
+      status.textContent = 'A beküldés elindult. Kérjük, a végleges használat előtt végezz próba-ajánlatkérést, és ellenőrizd, hogy megjelent-e a Google Táblázatban.';
+      this.reset();
+    } catch (err) {
+      status.textContent = 'Nem sikerült elindítani a beküldést. Ellenőrizd az internetkapcsolatot, majd próbáld újra vagy hívj minket.';
+    } finally {
+      button.disabled = false; button.textContent = '✉ Árajánlatkérés elküldése';
+    }
   });
 </script>
 </body>
