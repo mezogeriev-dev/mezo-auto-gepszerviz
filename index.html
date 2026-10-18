@@ -171,7 +171,7 @@
             <label>Jármű vagy gép típusa<input id="qVehicle" name="vehicle" required placeholder="Pl. Opel Astra / traktor"></label>
             <label>Elvégzendő munka<input id="qWork" name="work" required placeholder="Pl. olajcsere, fékcsere"></label>
             <label>Település<input id="qTown" name="town" placeholder="Pl. Debrecen"></label>
-            <label> Alvázszám<input id="qTown" name="town" placeholder="Pl.17 karakteres egyedi azonosítóra "></label>
+            <label> Alvázszám<input id="qnumber" name="number" placeholder="Pl.17 karakteres egyedi azonosítóra "></label>
             <label class="full">Részletek<textarea id="qDetails" name="details" rows="4" placeholder="Mi a probléma? Mikor lenne megfelelő?"></textarea></label>
           </div>
           <button class="btn" id="quoteSubmit" type="submit">✉ Árajánlatkérés elküldése</button>
@@ -220,6 +220,7 @@
   work: get('qWork'),
   town: get('qTown'),
   details: get('qDetails'),
+  number: get('qnumber'),
   website: get('website'),
   page: window.location.href
 });
