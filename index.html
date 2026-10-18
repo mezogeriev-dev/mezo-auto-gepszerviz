@@ -158,7 +158,16 @@
         <form id="quoteForm">
           <div class="form-grid">
             <label>Név (nem kötelező)<input id="qName" name="name" autocomplete="name" placeholder="Hogy szólíthatunk?"></label>
-            <label>Telefon szám<input id="qPhone" name="phone" required placeholder="Pl. +36 70 281 2869"></label>
+            <label>Telefonszám *
+  <input
+    id="qPhone"
+    name="phone"
+    type="tel"
+    autocomplete="tel"
+    required
+    placeholder="Pl. +36 70 281 2869"
+  >
+</label>
             <label>Jármű vagy gép típusa<input id="qVehicle" name="vehicle" required placeholder="Pl. Opel Astra / traktor"></label>
             <label>Elvégzendő munka<input id="qWork" name="work" required placeholder="Pl. olajcsere, fékcsere"></label>
             <label>Település<input id="qTown" name="town" placeholder="Pl. Debrecen"></label>
