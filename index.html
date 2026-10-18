@@ -204,10 +204,15 @@
       return;
     }
     const payload = new URLSearchParams({
-      name: get('qName'), vehicle: get('qVehicle'), work: get('qWork'),
-      town: get('qTown'), details: get('qDetails'), website: get('website'),
-      page: window.location.href
-    });
+  name: get('qName'),
+  phone: get('qPhone'),
+  vehicle: get('qVehicle'),
+  work: get('qWork'),
+  town: get('qTown'),
+  details: get('qDetails'),
+  website: get('website'),
+  page: window.location.href
+});
     button.disabled = true; button.textContent = 'Küldés…';
     status.textContent = 'Ajánlatkérés küldése…';
     try {
