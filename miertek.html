@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miért minket? - Mező Autó- és Gépszerviz</title>
+    <style>
+        body {
+            background-color: #0d0d0d;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        h1, h2, h3 {
+            color: #f39c12;
+            text-transform: uppercase;
+        }
+        .hero {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: #1a1a1a;
+            border-radius: 10px;
+            border: 1px solid #333;
+            margin-bottom: 30px;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .card {
+            background-color: #1a1a1a;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 4px solid #f39c12;
+        }
+        .cta-box {
+            text-align: center;
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 40px;
+            border: 2px solid #f39c12;
+        }
+        .phone-btn {
+            display: inline-block;
+            background-color: #f39c12;
+            color: #000;
+            font-weight: bold;
+            font-size: 1.2rem;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            margin-top: 15px;
+        }
+
+        /* Kiszállási űrlap stílusai */
+        .form-section {
+            background-color: #141414;
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 30px;
+            margin-top: 40px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #ccc;
+            font-size: 0.95rem;
+        }
+        .form-group input, 
+        .form-group textarea, 
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 5px;
+            border: 1px solid #444;
+            background-color: #222;
+            color: #fff;
+            box-sizing: border-box;
+            font-size: 1rem;
+        }
+        .form-group input:focus, 
+        .form-group textarea:focus {
+            border-color: #f39c12;
+            outline: none;
+        }
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 20px 0;
+            font-size: 0.85rem;
+            color: #aaa;
+        }
+        .checkbox-group input {
+            width: auto;
+        }
+        .submit-btn {
+            width: 100%;
+            background-color: #f39c12;
+            color: #000;
+            border: none;
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+        .submit-btn:hover {
+            background-color: #e08e0b;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <section class="hero">
+        <h1>Miért a Mező Autó- és Gépszerviz?</h1>
+        <p>Kényelmes, megbízható és rugalmas szerviz – akár az Ön otthonában vagy telephelyén!</p>
+    </section>
+
+    <div class="features-grid">
+        <div class="card">
+            <h3>🚗 Házhoz megyünk Önhöz</h3>
+            <p>Nincs ideje elhozni az autóját? Előzetes egyeztetés után a helyszínen végezzük el a javítást vagy karbantartást, így Ön időt spórol.</p>
+        </div>
+        <div class="card">
+            <h3>🚜 Autó és Munkagép egy helyen</h3>
+            <p>Személyautók és mezőgazdasági gépek szakszerű szervizelése. A fék- és olajcserétől a gépek folyamatos üzembentartásáig.</p>
+        </div>
+        <div class="card">
+            <h3>🤝 Átlátható és korrekt</h3>
+            <p>Minden munkát telefonos egyeztetés előz meg. Előre megbeszéljük a feladatot és az alkatrészeket, nincsenek rejtett költségek.</p>
+        </div>
+        <div class="card">
+            <h3>📍 Helyszíni kiszállás</h3>
+            <p>Hajdúböszörményben és környékén akár otthonában vagy telephelyén is vállaljuk a javítást.</p>
+        </div>
+    </div>
+
+    <!-- Helyszíni kiszállás igénylő űrlap -->
+    <section class="form-section">
+        <h2>Kérjen helyszíni kiszállást!</h2>
+        <p style="color: #aaa;">Töltse ki az alábbi adatokat, és munkatársunk visszahívja a részletek és az időpont egyeztetéséhez.</p>
+        
+        <form action="#" method="POST">
+            <div class="form-group">
+                <label for="neve">Az Ön neve *</label>
+                <input type="text" id="neve" name="neve" required placeholder="pl. Kovács János">
+            </div>
+            
+            <div class="form-group">
+                <label for="telefon">Telefonszám *</label>
+                <input type="tel" id="telefon" name="telefon" required placeholder="pl. 06 30 123 4567">
+            </div>
+
+            <div class="form-group">
+                <label for="cim">Kiszállási cím (település, utca) *</label>
+                <input type="text" id="cim" name="cim" required placeholder="pl. Hajdúböszörmény, Fő utca 12.">
+            </div>
+
+            <div class="form-group">
+                <label for="jarmu">Jármű / Gép típusa *</label>
+                <select id="jarmu" name="jarmu" required>
+                    <option value="">Válasszon típust...</option>
+                    <option value="Személyautó">Személyautó</option>
+                    <option value="Mezőgazdasági gép">Mezőgazdasági gép / Munkagép</option>
+                    <option value="Egyéb">Egyéb</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="reszletek">Probléma rövid leírása / Végzendő feladat</label>
+                <textarea id="reszletek" name="reszletek" rows="4" placeholder="pl. Olajcsere, fékellenőrzés, nem indul az autó..."></textarea>
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="adatvedelem" name="adatvedelem" required>
+                <label for="adatvedelem">Elfogadom az adatkezelési nyilatkozatot és hozzájárulok az adataim feldolgozásához a kapcsolatfelvétel céljából.</label>
+            </div>
+
+            <button type="submit" class="submit-btn">Kiszállás kérése & Viszajelzés</button>
+        </form>
+    </section>
+
+    <div class="cta-box">
+        <h2>Sürgős a javítás?</h2>
+        <p>Hívjon minket közvetlenül telefonon a gyors egyeztetésért!</p>
+        <a href="tel:+36702812869" class="phone-btn">📞 06 70 281 2869</a>
+    </div>
+</div>
+
+</body>
+</html>
