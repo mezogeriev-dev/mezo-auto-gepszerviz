@@ -93,6 +93,27 @@
     @media(max-width:420px){.brand{font-size:.88rem}.brand-mark{width:40px;height:40px}.actions .btn{width:100%}.machine-card{padding:18px 12px}.vehicle .emoji{font-size:2.8rem}.features{gap:8px}.feature{padding:14px 8px}}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
 
+    /* Adatkezelési jelölőnégyzet stílusa */
+    .checkbox-label {
+      display: flex !important;
+      align-items: flex-start;
+      gap: 10px;
+      font-weight: normal !important;
+      color: var(--muted) !important;
+      font-size: 0.88rem !important;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .checkbox-label input[type="checkbox"] {
+      width: auto !important;
+      margin-top: 3px;
+      cursor: pointer;
+    }
+    .checkbox-label a {
+      color: var(--gold2);
+      text-decoration: underline;
+    }
+
     /* Carousel / Slider stílusok */
     .carousel-container {
       position: relative;
@@ -143,7 +164,6 @@
       transform: scale(1.02);
     }
 
-    /* Navigációs nyilak */
     .carousel-btn {
       position: absolute;
       top: 55%;
@@ -299,6 +319,12 @@
             <label>Település<input id="qTown" name="town" placeholder="Pl. Debrecen"></label>
             <label>Alvázszám<input id="qnumber" name="number" type="text" maxlength="17" autocomplete="off" placeholder="17 karakteres alvázszám"></label>
             <label class="full">Részletek<textarea id="qDetails" name="details" rows="4" placeholder="Mi a probléma? Mikor lenne megfelelő?"></textarea></label>
+            
+            <!-- Adatkezelési nyilatkozat jelölőnégyzet -->
+            <label class="full checkbox-label">
+              <input type="checkbox" id="qPrivacy" name="privacy" required>
+              <span>Elfogadom az <a href="#" onclick="alert('Adatkezelési tájékoztató: A megadott adatokat (név, telefonszám, jármű adatai) kizárólag az árajánlat adásához és a kapcsolatfelvételhez használjuk fel, azokat harmadik félnek nem adjuk át.'); return false;">Adatkezelési Tájékoztatót</a>, és hozzájárulok adataim kezeléséhez. *</span>
+            </label>
           </div>
           <button class="btn" id="quoteSubmit" type="submit">✉ Árajánlatkérés elküldése</button>
           <p class="form-help" id="formStatus" role="status" aria-live="polite">Az adatok a vállalkozás központi Google Táblázatába kerülnek. Ne adj meg jelszót vagy más érzékeny adatot.</p>
@@ -337,6 +363,12 @@
       const button = document.getElementById('quoteSubmit');
       const get = id => document.getElementById(id).value.trim();
       if (get('website')) return;
+
+      const privacyChecked = document.getElementById('qPrivacy').checked;
+      if (!privacyChecked) {
+        status.textContent = 'A küldéshez el kell fogadnod az adatkezelési tájékoztatót!';
+        return;
+      }
       
       const payload = new URLSearchParams({
         name: get('qName'),
